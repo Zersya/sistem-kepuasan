@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use App\Kepuasan;
 
 class APIKepuasanController extends Controller
 {
@@ -34,15 +36,21 @@ class APIKepuasanController extends Controller
      */
     public function store(Request $request)
     {
-      $kepuasan = new kepuasan;
+      if(Input::get('pendapat') == null)
+        echo "Tolong isi Pendapat anda";
+      $kepuasan = new Kepuasan;
+      $kepuasan->no       = 1;
       $kepuasan->pendapat = Input::get('pendapat');
       $kepuasan->status   = Input::get('status');
+      $kepuasan->tanggal  = date("Y/m/d");
+      $kepuasan->waktu    = date("h:i:s");
       $success = $kepuasan->save();
 
       if($success){
         echo "Terima Kasih";
         return;
       }
+
       echo "Maaf ada Masalah";
     }
 
