@@ -8,6 +8,7 @@
     @extends('templates.index')
 
     @section('content')
+    <img src="{{ asset('images/smileIcon.png') }}" width="60" >
     {!! Form::open(array('url' => '/')) !!}
     <div class="form-group">
       {!! Form::label('lpendapat', 'Pendapat') !!}

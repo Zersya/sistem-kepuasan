@@ -12,6 +12,25 @@
                     <div id="chart-div">
                     </div>
                       {!! $lava->render('ColumnChart', 'Data', 'chart-div') !!}
+                      <table class="tableContent" style="width:100%;">
+                        <tr>
+                          <th>No</th>
+                          <th>Pendapat</th>
+                          <th>Status</th>
+                          <th>Tanggal</th>
+                        </tr>
+                        @foreach($dataLengkap as $key => $value)
+                        <tr>
+                          <td>{{ $key+1 }}</td>
+                          <td>{{ $value->pendapat }}</td>
+                          <td>{{ $value->status }}</td>
+                          <td>{{ $value->tanggal }}</td>
+                        </tr>
+                        @endforeach
+                      </table>
+                      <br>
+                    {!! Form::open(array('url' => Route('truncate'), 'method' => 'DELETE')) !!}
+                    {!! Form::button('Hapus Semua', array('type'=>'Submit', 'value'=>'Hapus Semua', 'name'=>'truncate')) !!}
                 </div>
             </div>
         </div>

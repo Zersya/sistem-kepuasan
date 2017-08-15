@@ -17,3 +17,5 @@ Route::post('/', 'InputKepuasanController@Store');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::delete('/home', 'HomeController@truncate')->name('truncate');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use App\Kepuasan;
 
 class HomeController extends Controller
@@ -24,7 +25,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-
       $lava = app('lavacharts');
       $data = $lava->DataTable();
 
@@ -57,8 +57,14 @@ class HomeController extends Controller
           'seriesType'=>'bars',
           'barGroupWidth'=>'100%',
        ]);
+      //return view('home', array('lava' => $lava, 'dataLengkap' => $this->getKepuasanData()));
+      return view('home', array('lava' => $lava, 'dataLengkap' => $this->getKepuasanData()));
+    }
 
-      return view('home', array('lava' => $lava));
+    public function getKepuasanData(){
+      $data =  Kepuasan::all();
+
+      return $data;
     }
 
     public function getStatusKepuasan($status, $tanggal){
@@ -69,5 +75,10 @@ class HomeController extends Controller
     public function getDateStatusKepuasan(){
       $tanggal = Kepuasan::all()->pluck('tanggal');
       return $tanggal;
+    }
+
+    public function truncate(){
+      Kepuasan::truncate();
+      return Redirect::to('/home');
     }
 }
