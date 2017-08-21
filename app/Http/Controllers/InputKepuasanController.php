@@ -37,6 +37,7 @@ class InputKepuasanController extends Controller
      */
     public function store(Request $request)
     {
+      date_default_timezone_set("Asia/Jakarta");
       if(Input::get('pendapat') != null){
         $kepuasan = new kepuasan;
         $kepuasan->no       = 1;

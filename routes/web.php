@@ -19,3 +19,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::delete('/home', 'HomeController@truncate')->name('truncate');
+
+Route::post('/home', 'HomeController@export2ex')->name('export2ex');

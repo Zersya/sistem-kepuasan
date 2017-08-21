@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use App\Kepuasan;
+use Maatwebsite\Excel\Facades\Excel;
 
 class HomeController extends Controller
 {
@@ -80,5 +81,25 @@ class HomeController extends Controller
     public function truncate(){
       Kepuasan::truncate();
       return Redirect::to('/home');
+    }
+
+    public function export2ex(){
+      Excel::create('Data_AKP_'.date('d-M-Y'), function($excel) {
+
+          $excel->setTitle('Data Kepuasan Pengunjung');
+
+          $excel->setCreator('Admin')
+                ->setCompany('BIIND Studio');
+
+          $excel->sheet('Sheet 1', function($sheet){
+
+            $dataK = Kepuasan::All();
+            
+            $sheet->fromModel($dataK, null,'A1', false, true);
+          });
+
+        })->download('xls');
+
+        return Redirect::to('/home');
     }
 }
