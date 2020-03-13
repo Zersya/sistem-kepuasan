@@ -1,0 +1,2 @@
+php artisan serve --host 0.0.0.0 --port 80 // menjadikan server pada network yg sama
+php -S localhost:8000 -t public            // public pada artisan serve untuk asset
